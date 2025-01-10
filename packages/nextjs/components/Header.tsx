@@ -108,7 +108,7 @@ export const Header = () => {
         >
           <div className="flex relative w-10 h-10">
             <Image
-              alt="SE2 logo"
+              alt="logo"
               className="cursor-pointer"
               fill
               src="/logo.svg"
