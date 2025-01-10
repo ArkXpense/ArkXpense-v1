@@ -57,11 +57,11 @@ module.exports = {
     themes: [
       {
         light: {
-          primary: "#93BBFB",
+          primary: "#f36a3d",
           "primary-content": "#2A3655",
           secondary: "#8B45FD",
           "secondary-content": "#7800FF",
-          accent: "#93BBFB",
+          accent: "#f36a3d",
           "accent-content": "#212638",
           neutral: "#212638",
           "neutral-content": "#ffffff",
@@ -69,7 +69,7 @@ module.exports = {
           "base-200": "#f4f8ff",
           "base-300": "#ffffff",
           "base-content": "#212638",
-          info: "#93BBFB",
+          info: "#f36a3d",
           success: "#34EEB6",
           warning: "#FFCF72",
           error: "#FF8863",
