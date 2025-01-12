@@ -48,7 +48,7 @@ const AddGroup = () => {
       {step === 1 && (
         <div className="space-y-4">
           <div>
-            <label className="block font-medium text-gray-700 mb-2">Title</label>
+            <label className="block font-medium text-gray-100 mb-2">Title</label>
             <input
               type="text"
               className="input input-bordered w-full"
@@ -58,7 +58,7 @@ const AddGroup = () => {
             />
           </div>
           <div>
-            <label className="block font-medium text-gray-700 mb-2">Currency</label>
+            <label className="block font-medium text-gray-100 mb-2">Currency</label>
             <select
               className="select select-bordered w-full"
               value={currency}
