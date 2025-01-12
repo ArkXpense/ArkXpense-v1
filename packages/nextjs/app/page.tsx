@@ -1,12 +1,12 @@
 import React from "react";
-import { AddExpense } from "~~/components/buttons";
+import { AddGroup } from "~~/components/buttons";
 import { Plus } from "lucide-react";
 
 export default function Home() {
 
   return (
     <div>
-      <AddExpense/>
+      <AddGroup/>
     </div>
   );
 }

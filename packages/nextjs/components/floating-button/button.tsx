@@ -25,6 +25,7 @@ const FloatingButton: React.FC<FloatingButtonProps> = ({
 
   return (
     <>
+      {/* Floating Button */}
       <div className="fixed bottom-6 right-6">
         <div className="tooltip tooltip-top" data-tip={tooltip}>
           <button
@@ -36,23 +37,25 @@ const FloatingButton: React.FC<FloatingButtonProps> = ({
         </div>
       </div>
 
+      {/* Modal */}
       <dialog id={modalId} className="modal">
-        <div className="modal-box w-full max-w-lg">
+        <div className="modal-box w-full max-w-lg relative">
+          {/* Close Button */}
+          <button
+            type="button"
+            className="absolute top-2 right-2 btn btn-sm btn-circle btn-ghost"
+            onClick={() => {
+              const modalElement = document.getElementById(
+                modalId
+              ) as HTMLDialogElement;
+              modalElement?.close();
+            }}
+          >
+            ✕
+          </button>
+
+          {/* Modal Content */}
           {ModalProp}
-          <div className="modal-action">
-            <button
-              type="button"
-              className="btn"
-              onClick={() => {
-                const modalElement = document.getElementById(
-                  modalId
-                ) as HTMLDialogElement;
-                modalElement?.close();
-              }}
-            >
-              Close
-            </button>
-          </div>
         </div>
       </dialog>
     </>
