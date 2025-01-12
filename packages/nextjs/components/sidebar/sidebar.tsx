@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, User, Settings, LogOut } from "lucide-react";
+import { Home, User, Settings, LogOut, GroupIcon } from "lucide-react";
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -16,6 +16,7 @@ const Sidebar = () => {
 
   const menuItems = [
     { name: "Dashboard", href: "/", icon: Home },
+    { name: "Groups", href: "/groups", icon: GroupIcon },
     { name: "Profile", href: "/profile", icon: User },
     { name: "Settings", href: "/settings", icon: Settings },
     // { name: "Logout", href: "/logout", icon: LogOut, color: "text-red-400 hover:text-red-300" },

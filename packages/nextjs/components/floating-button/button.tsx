@@ -1,20 +1,61 @@
 "use client";
 
-import React from "react";
-import { Plus } from "lucide-react";
+import React, { ReactNode } from "react";
 
-const FloatingButton = () => {
-  const handleClick = () => {
-    alert("Floating button clicked!");
+interface FloatingButtonProps {
+  onClick?: () => void; // Optional function triggered when the button is clicked
+  ModalProp: ReactNode; // Content to render inside the modal
+  tooltip: string; // Tooltip text
+  icon: ReactNode; // Icon for the button
+  modalId: string; // Unique ID for the modal
+}
+
+const FloatingButton: React.FC<FloatingButtonProps> = ({
+  onClick,
+  ModalProp,
+  tooltip,
+  icon,
+  modalId,
+}) => {
+  const handleButtonClick = () => {
+    if (onClick) onClick();
+    const modalElement = document.getElementById(modalId) as HTMLDialogElement;
+    modalElement?.showModal();
   };
 
   return (
-    <button
-      onClick={handleClick}
-      className="fixed bottom-6 right-6 bg-blue-600 text-white rounded-full p-4 shadow-lg hover:bg-blue-500 transition flex items-center justify-center"
-    >
-      <Plus size={24} />
-    </button>
+    <>
+      <div className="fixed bottom-6 right-6">
+        <div className="tooltip tooltip-left" data-tip={tooltip}>
+          <button
+            onClick={handleButtonClick}
+            className="bg-custom-orange text-white rounded-full p-4 shadow-lg transition flex items-center justify-center"
+          >
+            {icon}
+          </button>
+        </div>
+      </div>
+
+      <dialog id={modalId} className="modal">
+        <div className="modal-box w-full max-w-lg">
+          {ModalProp}
+          <div className="modal-action">
+            <button
+              type="button"
+              className="btn"
+              onClick={() => {
+                const modalElement = document.getElementById(
+                  modalId
+                ) as HTMLDialogElement;
+                modalElement?.close();
+              }}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </dialog>
+    </>
   );
 };
 
