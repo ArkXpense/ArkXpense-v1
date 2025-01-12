@@ -48,7 +48,7 @@ export const ScaffoldStarkAppWithProviders = ({
       connectors={connectors}
       explorer={starkscan}
     >
-      <ProgressBar />
+      {/* <ProgressBar /> */}
       <ScaffoldStarkApp>{children}</ScaffoldStarkApp>
     </StarknetConfig>
   );
