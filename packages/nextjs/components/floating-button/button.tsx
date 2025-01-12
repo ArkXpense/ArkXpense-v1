@@ -26,7 +26,7 @@ const FloatingButton: React.FC<FloatingButtonProps> = ({
   return (
     <>
       <div className="fixed bottom-6 right-6">
-        <div className="tooltip tooltip-left" data-tip={tooltip}>
+        <div className="tooltip tooltip-top" data-tip={tooltip}>
           <button
             onClick={handleButtonClick}
             className="bg-custom-orange text-white rounded-full p-4 shadow-lg transition flex items-center justify-center"
