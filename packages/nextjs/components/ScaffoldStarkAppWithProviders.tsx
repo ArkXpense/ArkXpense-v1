@@ -9,14 +9,18 @@ import { ProgressBar } from "~~/components/scaffold-stark/ProgressBar";
 import { appChains, connectors } from "~~/services/web3/connectors";
 import provider from "~~/services/web3/provider";
 import { useNativeCurrencyPrice } from "~~/hooks/scaffold-stark/useNativeCurrencyPrice";
+import { Sidebar } from "./sidebar";
 
 const ScaffoldStarkApp = ({ children }: { children: React.ReactNode }) => {
   useNativeCurrencyPrice();
   return (
     <>
-      <div className="flex relative flex-col min-h-screen bg-main">
-        <Header />
-        <main className="relative flex flex-col flex-1">{children}</main>
+      <div className="flex relative min-h-screen bg-main">
+        <Sidebar />
+        <div className="flex flex-col w-full">
+          <Header />
+          <main className="relative flex flex-col flex-1">{children}</main>
+        </div>
         {/* <Footer /> */}
       </div>
       <Toaster />
