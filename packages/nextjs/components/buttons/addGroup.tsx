@@ -2,161 +2,198 @@
 
 import React, { useState } from "react";
 import { FloatingButton } from "~~/components/floating-button";
-import { Plus, Trash } from "lucide-react";
+import { Plus, Users, Group, Trash } from "lucide-react";
+import { useFormSetterWithValidation } from "~~/hooks/useFormSetter";
 
 const AddGroup = () => {
-  const [step, setStep] = useState(1);
-  const [title, setTitle] = useState("");
-  const [currency, setCurrency] = useState("USD");
-  const [name, setName] = useState("");
-  const [wallet, setWallet] = useState("");
-  const [participants, setParticipants] = useState<{ name: string; wallet: string }[]>([]);
+  const validators = {
+    title: (value: string) => (value.trim() === "" ? "Title is required" : null),
+    groupCode: (value: string) =>
+      value.trim() === "" ? "Group code is required" : null,
+  };
 
-  const handleAddParticipant = () => {
+  const [formState, setField, errors] = useFormSetterWithValidation(
+    {
+      title: "",
+      groupCode: "",
+      participants: [] as { name: string; wallet: string }[],
+    },
+    validators
+  );
+
+  const [step, setStep] = useState(1);
+
+  const handleNext = () => {
+    if (step === 1 && !formState.title.trim()) {
+      console.error("Title is required");
+      return;
+    }
+    setStep((prev) => prev + 1);
+  };
+
+  const handlePrevious = () => setStep((prev) => prev - 1);
+
+  const handleAddParticipant = (name: string, wallet: string) => {
     if (name.trim() && wallet.trim()) {
-      setParticipants([...participants, { name, wallet }]);
-      setName("");
-      setWallet("");
+      setField("participants", [
+        ...formState.participants,
+        { name, wallet },
+      ]);
     }
   };
 
   const handleRemoveParticipant = (index: number) => {
-    setParticipants(participants.filter((_, i) => i !== index));
+    setField(
+      "participants",
+      formState.participants.filter((_, i) => i !== index)
+    );
   };
-
-  const handleNext = () => setStep((prev) => prev + 1);
-  const handlePrevious = () => setStep((prev) => prev - 1);
 
   const handleSaveGroup = () => {
-    const groupData = {
-      title,
-      currency,
-      participants,
-    };
-    console.log("Group Created:", groupData);
+    if (!formState.title.trim() || formState.participants.length === 0) {
+      console.error("Validation failed: Title and participants are required");
+      return;
+    }
+    console.log("Group Created:", {
+      title: formState.title,
+      participants: formState.participants,
+    });
   };
-
-  const ModalContent = (
-    <div className="text-left space-y-6">
-      {/* Stepper */}
-      <ul className="steps w-full">
-        <li className={`step ${step >= 1 ? "step-primary" : ""}`}>Details</li>
-        <li className={`step ${step >= 2 ? "step-primary" : ""}`}>Participants</li>
-      </ul>
-
-      {/* Step 1: Title and Currency */}
-      {step === 1 && (
-        <div className="space-y-4">
-          <div>
-            <label className="block font-medium text-gray-100 mb-2">Title</label>
-            <input
-              type="text"
-              className="input input-bordered w-full"
-              placeholder="Group Title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </div>
-          <div>
-            <label className="block font-medium text-gray-100 mb-2">Currency</label>
-            <select
-              className="select select-bordered w-full"
-              value={currency}
-              onChange={(e) => setCurrency(e.target.value)}
-            >
-              <option value="USDC">USDC</option>
-              <option value="STRK">STRK</option>
-              <option value="ETH">ETH</option>
-            </select>
-          </div>
-        </div>
-      )}
-
-      {/* Step 2: Add Participants */}
-      {step === 2 && (
-        <div className="space-y-4">
-          <div>
-            <label className="block font-medium text-gray-700 mb-2">Add Participant</label>
-            <div className="flex items-center space-x-2">
-              <input
-                type="text"
-                className="input input-bordered w-full"
-                placeholder="Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <input
-                type="text"
-                className="input input-bordered w-full"
-                placeholder="Wallet Address"
-                value={wallet}
-                onChange={(e) => setWallet(e.target.value)}
-              />
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={handleAddParticipant}
-              >
-                <Plus size={24} />
-              </button>
-            </div>
-          </div>
-          {participants.length > 0 && (
-            <div>
-              <h3 className="font-medium text-gray-700 mb-2">Participants</h3>
-              <ul className="">
-                {participants.map((participant, index) => (
-                  <li
-                    key={index}
-                    className="flex justify-between items-center p-1  rounded-md"
-                  >
-                    <div>
-                      <p className="font-medium p-0">{participant.name}</p>
-                      <p className="text-sm text-gray-600 p-0">{participant.wallet}</p>
-                    </div>
-                    <button
-                      type="button"
-                      className="btn btn-sm btn-error"
-                      onClick={() => handleRemoveParticipant(index)}
-                    >
-                      <Trash size={16}/>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* Navigation Buttons */}
-      <div className="flex justify-between">
-        {step > 1 && (
-          <button className="btn btn-secondary" onClick={handlePrevious}>
-            Previous
-          </button>
-        )}
-        {step < 2 && (
-          <button className="btn btn-primary" onClick={handleNext}>
-            Next
-          </button>
-        )}
-        {step === 2 && (
-          <button className="btn btn-success" onClick={handleSaveGroup}>
-            Save Group
-          </button>
-        )}
-      </div>
-    </div>
-  );
 
   return (
     <FloatingButton
-      onClick={handleSaveGroup}
-      ModalProp={ModalContent}
-      tooltip="Add Group"
-      icon={<Plus size={24} />}
-      modalId="add-expense-modal"
+      mainTooltip="Main Actions"
+      mainIcon={<Plus size={24} />}
+      buttons={[
+        {
+          id: "new-group-modal",
+          tooltip: "New Group",
+          icon: <Group size={20} />,
+          ModalContent: (
+            <div className="text-left space-y-6">
+              <ul className="steps w-full">
+                <li className={`step ${step >= 1 ? "step-primary" : ""}`}>
+                  Details
+                </li>
+                <li className={`step ${step >= 2 ? "step-primary" : ""}`}>
+                  Participants
+                </li>
+              </ul>
+              {step === 1 && (
+                <div className="space-y-4">
+                  <div>
+                    <label className="block font-medium text-gray-100 mb-2">
+                      Title
+                    </label>
+                    <input
+                      type="text"
+                      className={`input input-bordered w-full ${
+                        errors.title ? "input-error" : ""
+                      }`}
+                      placeholder="Group Title"
+                      value={formState.title}
+                      onChange={(e) => setField("title", e.target.value)}
+                    />
+                  </div>
+                </div>
+              )}
+              {step === 2 && (
+                <div className="space-y-4">
+                  <div>
+                    <label className="block font-medium text-gray-700 mb-2">
+                      Add Participant
+                    </label>
+                    <div className="flex items-center space-x-2">
+                      <input
+                        type="text"
+                        className="input input-bordered w-full"
+                        placeholder="Name"
+                        onBlur={(e) =>
+                          handleAddParticipant(e.target.value, "example-wallet")
+                        }
+                      />
+                    </div>
+                    {formState.participants.length > 0 && (
+                      <div>
+                        <h3 className="font-medium text-gray-700 mb-2">
+                          Participants
+                        </h3>
+                        <ul>
+                          {formState.participants.map((p, index) => (
+                            <li
+                              key={index}
+                              className="flex justify-between items-center"
+                            >
+                              <span>{p.name}</span>
+                              <span className="text-gray-500">{p.wallet}</span>
+                              <button
+                                type="button"
+                                className="btn btn-sm btn-error"
+                                onClick={() => handleRemoveParticipant(index)}
+                              >
+                                <Trash size={16} />
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+              <div className="flex justify-between">
+                {step > 1 && (
+                  <button className="btn btn-secondary" onClick={handlePrevious}>
+                    Previous
+                  </button>
+                )}
+                {step < 2 && (
+                  <button className="btn btn-primary" onClick={handleNext}>
+                    Next
+                  </button>
+                )}
+                {step === 2 && (
+                  <button className="btn btn-success" onClick={handleSaveGroup}>
+                    Save Group
+                  </button>
+                )}
+              </div>
+            </div>
+          ),
+        },
+        {
+          id: "join-group-modal",
+          tooltip: "Join Group",
+          icon: <Users size={20} />,
+          ModalContent: (
+            <div className="text-left space-y-6">
+              <h3 className="text-lg font-bold">Join a Group</h3>
+              <ul className="steps w-full">
+                <li className={`step step-primary`}>Details</li>
+                <li className={`step`}>Participants</li>
+              </ul>
+              <div>
+                <label className="block font-medium text-gray-700 mb-2">
+                  Group Code
+                </label>
+                <input
+                  type="text"
+                  className="input input-bordered w-full"
+                  placeholder="Enter Group Code"
+                  value={formState.groupCode}
+                  onChange={(e) => setField("groupCode", e.target.value)}
+                />
+              </div>
+              <button
+                className="btn btn-primary w-full"
+                onClick={() => console.log("Joining group:", formState.groupCode)}
+              >
+                Join Group
+              </button>
+            </div>
+          ),
+        },
+      ]}
     />
   );
 };
