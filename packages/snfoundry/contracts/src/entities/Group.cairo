@@ -11,3 +11,9 @@ pub struct Group {
     //User address : balance
     balances: Map<ContractAddress, i32>,
 }
+
+//Methods for the Group struct
+#[generate_trait]
+impl ExpenseImpl of ExpenseTrait {
+    
+}

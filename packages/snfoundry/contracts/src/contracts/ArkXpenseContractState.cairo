@@ -1,21 +1,14 @@
 #[starknet::interface]
 pub trait IArkXpenseContractState<TContractState> {
-    //get functions
-
-    //create functions
-
-    //update functions
-
-
-    
+   //funtions to the implemented by the contract 
 }
 
 #[starknet::contract]
 mod ArkXpenseContractState {
-    use openzeppelin_access::ownable::OwnableComponent;
+    //use openzeppelin_access::ownable::OwnableComponent;
     use starknet::storage::Map;
-    use starknet::{ContractAddress, contract_address_const};
-    use starknet::{get_caller_address, get_contract_address};
+    use starknet::{ContractAddress};//, contract_address_const};
+    //use starknet::{get_caller_address, get_contract_address};
     use super::{IArkXpenseContractState};
     use crate::entities::Expense::{Expense};
     use crate::entities::Group::{Group};

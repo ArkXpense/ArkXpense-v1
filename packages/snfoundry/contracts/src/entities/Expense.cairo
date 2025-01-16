@@ -11,6 +11,7 @@ pub struct Expense {
 
 }
 
+//Methods for the Expense struct
 #[generate_trait]
 impl ExpenseImpl of ExpenseTrait {
     
