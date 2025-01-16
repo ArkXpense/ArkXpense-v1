@@ -1,6 +1,6 @@
 use starknet::{ContractAddress};
 
-#[storage]
+#[derive(Drop, Serde, starknet::Store)]
 pub struct User {
     address: ContractAddress, //key 
     nickname: felt252,

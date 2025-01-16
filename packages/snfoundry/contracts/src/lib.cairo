@@ -2,10 +2,10 @@ mod contracts{
     mod ArkXpenseContractState;
 }
 
-mod entities{
-    mod User;
-    mod Group;
-    mod Expense;
+pub mod entities{
+    pub mod User;
+    pub mod Group;
+    pub mod Expense;
 }
 
 //#[cfg(test)]

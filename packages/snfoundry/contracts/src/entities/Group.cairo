@@ -2,7 +2,7 @@ use starknet::storage::Map;
 use crate::entities::User::{User};
 use starknet::{ContractAddress};
 
-#[storage]
+#[starknet::storage_node]
 pub struct Group {
     id:u32, //
     group_name: felt252,
