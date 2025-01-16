@@ -7,7 +7,7 @@ const deployedContracts = {
   devnet: {
     ArkXpenseContractState: {
       address:
-        "0x1cf35695e6f8e6ef5b2d1f78ef87911eeafd99640c8e91b5a409002ea8ba804",
+        "0x36171ae30fa10726ae09c52d350b3fc29d188fc20b3e519e2ad42e03c17856",
       abi: [
         {
           type: "impl",
@@ -18,145 +18,28 @@ const deployedContracts = {
         {
           type: "interface",
           name: "contracts::contracts::ArkXpenseContractState::IArkXpenseContractState",
-          items: [],
-        },
-        {
-          type: "constructor",
-          name: "constructor",
-          inputs: [
-            {
-              name: "owner",
-              type: "core::starknet::contract_address::ContractAddress",
-            },
-          ],
-        },
-        {
-          type: "event",
-          name: "contracts::contracts::ArkXpenseContractState::ArkXpenseContractState::Event",
-          kind: "enum",
-          variants: [],
-        },
-      ],
-      classHash:
-        "0x3c292c31d2a9c9033bd4d0085d08ab876138c6dbfeae0297e0ab402faca5e2d",
-    },
-  },
-  sepolia: {
-    YourContract: {
-      address:
-        "0x775a3deda5f4816362f785acaabeb48ceb0c26f559913307c8e32304287bb82",
-      abi: [
-        {
-          type: "impl",
-          name: "YourContractImpl",
-          interface_name:
-            "contracts::contracts::ArkXpenseStateContract::IYourContract",
-        },
-        {
-          type: "struct",
-          name: "core::byte_array::ByteArray",
-          members: [
-            {
-              name: "data",
-              type: "core::array::Array::<core::bytes_31::bytes31>",
-            },
-            {
-              name: "pending_word",
-              type: "core::felt252",
-            },
-            {
-              name: "pending_word_len",
-              type: "core::integer::u32",
-            },
-          ],
-        },
-        {
-          type: "struct",
-          name: "core::integer::u256",
-          members: [
-            {
-              name: "low",
-              type: "core::integer::u128",
-            },
-            {
-              name: "high",
-              type: "core::integer::u128",
-            },
-          ],
-        },
-        {
-          type: "enum",
-          name: "core::bool",
-          variants: [
-            {
-              name: "False",
-              type: "()",
-            },
-            {
-              name: "True",
-              type: "()",
-            },
-          ],
-        },
-        {
-          type: "interface",
-          name: "contracts::contracts::ArkXpenseStateContract::IYourContract",
           items: [
             {
               type: "function",
-              name: "greeting",
+              name: "test",
               inputs: [],
               outputs: [
                 {
-                  type: "core::byte_array::ByteArray",
+                  type: "core::starknet::contract_address::ContractAddress",
                 },
               ],
-              state_mutability: "view",
-            },
-            {
-              type: "function",
-              name: "set_greeting",
-              inputs: [
-                {
-                  name: "new_greeting",
-                  type: "core::byte_array::ByteArray",
-                },
-                {
-                  name: "amount_eth",
-                  type: "core::integer::u256",
-                },
-              ],
-              outputs: [],
               state_mutability: "external",
-            },
-            {
-              type: "function",
-              name: "withdraw",
-              inputs: [],
-              outputs: [],
-              state_mutability: "external",
-            },
-            {
-              type: "function",
-              name: "premium",
-              inputs: [],
-              outputs: [
-                {
-                  type: "core::bool",
-                },
-              ],
-              state_mutability: "view",
             },
           ],
         },
         {
           type: "impl",
-          name: "OwnableImpl",
-          interface_name: "openzeppelin_access::ownable::interface::IOwnable",
+          name: "OwnableMixinImpl",
+          interface_name: "openzeppelin_access::ownable::interface::OwnableABI",
         },
         {
           type: "interface",
-          name: "openzeppelin_access::ownable::interface::IOwnable",
+          name: "openzeppelin_access::ownable::interface::OwnableABI",
           items: [
             {
               type: "function",
@@ -184,6 +67,25 @@ const deployedContracts = {
             {
               type: "function",
               name: "renounce_ownership",
+              inputs: [],
+              outputs: [],
+              state_mutability: "external",
+            },
+            {
+              type: "function",
+              name: "transferOwnership",
+              inputs: [
+                {
+                  name: "newOwner",
+                  type: "core::starknet::contract_address::ContractAddress",
+                },
+              ],
+              outputs: [],
+              state_mutability: "external",
+            },
+            {
+              type: "function",
+              name: "renounceOwnership",
               inputs: [],
               outputs: [],
               state_mutability: "external",
@@ -253,34 +155,7 @@ const deployedContracts = {
         },
         {
           type: "event",
-          name: "contracts::contracts::ArkXpenseStateContract::YourContract::GreetingChanged",
-          kind: "struct",
-          members: [
-            {
-              name: "greeting_setter",
-              type: "core::starknet::contract_address::ContractAddress",
-              kind: "key",
-            },
-            {
-              name: "new_greeting",
-              type: "core::byte_array::ByteArray",
-              kind: "key",
-            },
-            {
-              name: "premium",
-              type: "core::bool",
-              kind: "data",
-            },
-            {
-              name: "value",
-              type: "core::integer::u256",
-              kind: "data",
-            },
-          ],
-        },
-        {
-          type: "event",
-          name: "contracts::contracts::ArkXpenseStateContract::YourContract::Event",
+          name: "contracts::contracts::ArkXpenseContractState::ArkXpenseContractState::Event",
           kind: "enum",
           variants: [
             {
@@ -288,16 +163,11 @@ const deployedContracts = {
               type: "openzeppelin_access::ownable::ownable::OwnableComponent::Event",
               kind: "flat",
             },
-            {
-              name: "GreetingChanged",
-              type: "contracts::contracts::ArkXpenseStateContract::YourContract::GreetingChanged",
-              kind: "nested",
-            },
           ],
         },
       ],
       classHash:
-        "0x4e881db1286914119f2c900d19ab8fea1811614fdfa86d5f7539f7bc1c83e9c",
+        "0x6a9339ec15e1f1e34728018fdf708840045937a2b19598c81387ebad16088d1",
     },
   },
 } as const;

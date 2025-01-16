@@ -1,11 +1,14 @@
+use starknet::ContractAddress;
+
 #[starknet::interface]
 pub trait IArkXpenseContractState<TContractState> {
-   //funtions to the implemented by the contract 
+    fn test(ref self: TContractState) -> ContractAddress;
 }
 
 #[starknet::contract]
 mod ArkXpenseContractState {
-    //use openzeppelin_access::ownable::OwnableComponent;
+
+    use openzeppelin_access::ownable::OwnableComponent;
     use starknet::storage::Map;
     use starknet::{ContractAddress};//, contract_address_const};
     //use starknet::{get_caller_address, get_contract_address};
@@ -14,11 +17,12 @@ mod ArkXpenseContractState {
     use crate::entities::Group::{Group};
     
 
-    //component!(path: OwnableComponent, storage: ownable, event: OwnableEvent);
+    component!(path: OwnableComponent, storage: ownable, event: OwnableEvent);
 
+    // Ownable Mixin
     #[abi(embed_v0)]
-    //impl OwnableImpl = OwnableComponent::OwnableImpl<ContractState>;
-    //impl OwnableInternalImpl = OwnableComponent::InternalImpl<ContractState>;
+    impl OwnableMixinImpl = OwnableComponent::OwnableMixinImpl<ContractState>;
+    impl InternalImpl = OwnableComponent::InternalImpl<ContractState>;
 
     #[storage]
     struct Storage {
@@ -33,16 +37,29 @@ mod ArkXpenseContractState {
 
         //group id : group
         id_group_map: Map<u32, Group>,
+        #[substorage(v0)]
+        ownable: OwnableComponent::Storage,
+    }
+
+    #[event]
+    #[derive(Drop, starknet::Event)]
+    enum Event {
+        #[flat]
+        OwnableEvent: OwnableComponent::Event,
     }
 
     #[constructor]
     fn constructor(ref self: ContractState, owner: ContractAddress) {
         //self.greeting.write("Building Unstoppable Apps!!!");
-        //self.ownable.initializer(owner);
+        self.ownable.initializer(owner);
     }
-
+    
     #[abi(embed_v0)]
     impl YourContractImpl of IArkXpenseContractState<ContractState> {
         
+        fn test(ref self: ContractState) -> ContractAddress {
+            self.ownable.assert_only_owner();
+            return self.ownable.owner();
+        }
     }
 }
