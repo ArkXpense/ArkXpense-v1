@@ -7,7 +7,7 @@ const deployedContracts = {
   devnet: {
     ArkXpenseContractState: {
       address:
-        "0x30c5f7ea5637266b0159f3ac12fadda9d1194640cf119516417b6ad3402af55",
+        "0x636ef511ed2abd9f1a322b120c4dfc83c16fed92e7a00e85136cf6fdf04425f",
       abi: [
         {
           type: "impl",
@@ -38,7 +38,7 @@ const deployedContracts = {
         },
       ],
       classHash:
-        "0x60ca074e59b7e3488d32b92758e8e5fdc0af5a080371160e3aaf81876a3aada",
+        "0x3c292c31d2a9c9033bd4d0085d08ab876138c6dbfeae0297e0ab402faca5e2d",
     },
   },
   sepolia: {

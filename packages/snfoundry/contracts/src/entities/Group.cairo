@@ -4,7 +4,7 @@ use starknet::{ContractAddress};
 
 #[storage]
 pub struct Group {
-    id:u32, //key
+    id:u32, //
     group_name: felt252,
     users: Array<User>,
     userCounter: u8,

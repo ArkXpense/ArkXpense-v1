@@ -47,8 +47,13 @@ mod ArkXpenseContractState {
 
     #[storage]
     struct Storage {
-        greeting: ByteArray,
-        premium: bool,
+        group_counter: u32,
+        expense_counter: u32,
+
+        //user address : array of group ids where user is present
+        user_group_map: Map<ContractAddress, Array<u32>>,
+        group_expense_map: Map<u32, Array<u32>>,
+
         total_counter: u256,
         user_greeting_counter: Map<ContractAddress, u256>,
         #[substorage(v0)]
@@ -57,7 +62,7 @@ mod ArkXpenseContractState {
 
     #[constructor]
     fn constructor(ref self: ContractState, owner: ContractAddress) {
-        self.greeting.write("Building Unstoppable Apps!!!");
+        //self.greeting.write("Building Unstoppable Apps!!!");
         //self.ownable.initializer(owner);
     }
 
