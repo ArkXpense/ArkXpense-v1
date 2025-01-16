@@ -7,7 +7,7 @@ const deployedContracts = {
   devnet: {
     ArkXpenseContractState: {
       address:
-        "0xec36e45c5b4bc27916b252595ed4cc08c50bf21817f4cf4d89ad37d23bd780",
+        "0x1cf35695e6f8e6ef5b2d1f78ef87911eeafd99640c8e91b5a409002ea8ba804",
       abi: [
         {
           type: "impl",

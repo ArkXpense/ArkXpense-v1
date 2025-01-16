@@ -8,6 +8,7 @@ pub struct Expense {
     guarrantor: ContractAddress,
     //User address : amount to be paid
     debtors: Map<ContractAddress, u32>,
+    paid:bool,
 
 }
 
