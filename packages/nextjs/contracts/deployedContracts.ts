@@ -7,11 +7,11 @@ const deployedContracts = {
   devnet: {
     ArkXpenseContractState: {
       address:
-        "0x5aae7e354598db5b90831308d157342641d6f484ba073ba5337b4752fbc9f07",
+        "0x69743c633e67d00b438ac58d69419769c7ac145e4c0a36bf5e595f8c60772d5",
       abi: [
         {
           type: "impl",
-          name: "YourContractImpl",
+          name: "ArkXpenseContractState",
           interface_name:
             "contracts::contracts::ArkXpenseContractState::IArkXpenseContractState",
         },
@@ -183,7 +183,7 @@ const deployedContracts = {
         },
       ],
       classHash:
-        "0x668bc8067439519c15438d3dcbefd2f44e1c0874cc7b22174b383449eb80d80",
+        "0x198dfe22d9ae5398110536d6ba1d3ee051d4ed492a45e528478f9fd4652057c",
     },
   },
 } as const;
