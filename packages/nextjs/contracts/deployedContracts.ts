@@ -7,7 +7,7 @@ const deployedContracts = {
   devnet: {
     ArkXpenseContractState: {
       address:
-        "0x36171ae30fa10726ae09c52d350b3fc29d188fc20b3e519e2ad42e03c17856",
+        "0x5aae7e354598db5b90831308d157342641d6f484ba073ba5337b4752fbc9f07",
       abi: [
         {
           type: "impl",
@@ -29,6 +29,22 @@ const deployedContracts = {
                 },
               ],
               state_mutability: "external",
+            },
+            {
+              type: "function",
+              name: "get_user_groups",
+              inputs: [
+                {
+                  name: "user_address",
+                  type: "core::starknet::contract_address::ContractAddress",
+                },
+              ],
+              outputs: [
+                {
+                  type: "core::array::Array::<core::integer::u32>",
+                },
+              ],
+              state_mutability: "view",
             },
           ],
         },
@@ -167,7 +183,7 @@ const deployedContracts = {
         },
       ],
       classHash:
-        "0x6a9339ec15e1f1e34728018fdf708840045937a2b19598c81387ebad16088d1",
+        "0x668bc8067439519c15438d3dcbefd2f44e1c0874cc7b22174b383449eb80d80",
     },
   },
 } as const;
