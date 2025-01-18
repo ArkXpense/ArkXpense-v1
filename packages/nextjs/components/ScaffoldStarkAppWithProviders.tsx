@@ -4,28 +4,42 @@ import React, { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { StarknetConfig, starkscan } from "@starknet-react/core";
 import { Header } from "~~/components/Header";
-import { Footer } from "~~/components/Footer";
-import { ProgressBar } from "~~/components/scaffold-stark/ProgressBar";
+import { Sidebar } from "./sidebar";
 import { appChains, connectors } from "~~/services/web3/connectors";
 import provider from "~~/services/web3/provider";
 import { useNativeCurrencyPrice } from "~~/hooks/scaffold-stark/useNativeCurrencyPrice";
-import { Sidebar } from "./sidebar";
-
+import { useAccount } from "~~/hooks/useAccount";
 
 const ScaffoldStarkApp = ({ children }: { children: React.ReactNode }) => {
   useNativeCurrencyPrice();
+  const { status } = useAccount(); // Hook que retorna el estado del usuario
+
+  const [isAuthPage, setIsAuthPage] = useState(false);
+
+  useEffect(() => {
+    // Verificar si estamos en las páginas "/login" o "/register"
+    const currentPath = window.location.pathname;
+    const authPages = ["/login", "/register"];
+    setIsAuthPage(authPages.includes(currentPath));
+
+    // Redirigir al login si no está autenticado y no está en una página de autenticación
+    if (status !== "connected" && !authPages.includes(currentPath)) {
+      window.location.href = "/login";
+    }
+  }, [status]);
+
   return (
     <>
-      <div className="flex relative min-h-screen bg-main">
-        <Sidebar />
+      <div className={`flex relative min-h-screen ${isAuthPage ? "" : "bg-main"}`}>
+        {/* Renderiza Header y Sidebar solo si no estamos en páginas de autenticación */}
+        {!isAuthPage && <Sidebar />}
         <div className="flex flex-col w-full">
-          <Header />
+          {!isAuthPage && <Header />}
           <main className="relative flex flex-col flex-1 overflow-auto">{children}</main>
         </div>
-        {/* <Footer /> */}
       </div>
-      {/* <FloatingButton/> */}
-      <Toaster />
+      {/* Mostrar Toaster si no estamos en páginas de autenticación */}
+      {!isAuthPage && <Toaster />}
     </>
   );
 };
@@ -50,7 +64,6 @@ export const ScaffoldStarkAppWithProviders = ({
       connectors={connectors}
       explorer={starkscan}
     >
-      {/* <ProgressBar /> */}
       <ScaffoldStarkApp>{children}</ScaffoldStarkApp>
     </StarknetConfig>
   );

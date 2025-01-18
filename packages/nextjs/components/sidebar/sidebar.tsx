@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, User, Settings, LogOut, GroupIcon } from "lucide-react";
 import ArkXpense from "../../public/ArkXpence.svg"
+
 const Sidebar = () => {
   const pathname = usePathname();
   const [activeRoute, setActiveRoute] = useState<string>("");
