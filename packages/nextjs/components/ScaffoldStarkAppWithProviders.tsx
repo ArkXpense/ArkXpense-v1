@@ -16,11 +16,11 @@ const ScaffoldStarkApp = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
-      <div className={`flex relative min-h-screen ${isAuthPage ? "" : "bg-main"}`}>
+      <div className={`flex relative overflow-y-hidden} ${isAuthPage ? "" : "bg-main"}`}>
         {!isAuthPage && <Sidebar />}
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full h-screen">
           {!isAuthPage && <Header />}
-          <main className="relative flex flex-col flex-1 overflow-auto">{children}</main>
+          <main className="relative overflow-y-auto">{children}</main>
         </div>
       </div>
       {!isAuthPage && <Toaster />}
