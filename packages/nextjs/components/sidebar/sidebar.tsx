@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, User, Settings, LogOut, GroupIcon } from "lucide-react";
-
+import ArkXpense from "../../public/ArkXpence.svg"
 const Sidebar = () => {
   const pathname = usePathname();
   const [activeRoute, setActiveRoute] = useState<string>("");
@@ -27,10 +27,10 @@ const Sidebar = () => {
       {/* Logo */}
       <div className="p-6 flex items-center justify-center border-b border-gray-800">
         <Image
-          src="/placeholder-logo.png"
+          src={ArkXpense}
           alt="Logo"
-          width={80}
-          height={80}
+          width={300}
+          height={300}
           className="rounded-full"
         />
       </div>
