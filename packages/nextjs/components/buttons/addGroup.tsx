@@ -2,8 +2,16 @@
 
 import React, { useState } from "react";
 import { FloatingButton } from "~~/components/floating-button";
-import { Plus, Users, Group, Trash } from "lucide-react";
+import { Plus, Users, Group, Trash, CheckCircle } from "lucide-react";
 import { useFormSetterWithValidation } from "~~/hooks/useFormSetter";
+
+// Grupos hardcodeados
+const hardcodedGroups = [
+  { code: "1234", title: "Grupo 1" },
+  { code: "5678", title: "Grupo 2" },
+  { code: "9101", title: "Grupo 3" },
+  { code: "1121", title: "Grupo 4" },
+];
 
 const AddGroup = () => {
   const validators = {
@@ -22,6 +30,8 @@ const AddGroup = () => {
   );
 
   const [step, setStep] = useState(1);
+  const [joinSuccess, setJoinSuccess] = useState(false);
+  const [joinError, setJoinError] = useState("");
 
   const handleNext = () => {
     if (step === 1 && !formState.title.trim()) {
@@ -58,6 +68,17 @@ const AddGroup = () => {
       title: formState.title,
       participants: formState.participants,
     });
+  };
+
+  const handleJoinGroup = () => {
+    const group = hardcodedGroups.find(g => g.code === formState.groupCode);
+    if (group) {
+      setJoinSuccess(true);
+      setJoinError("");
+    } else {
+      setJoinSuccess(false);
+      setJoinError("Invalid group code");
+    }
   };
 
   return (
@@ -184,9 +205,18 @@ const AddGroup = () => {
                   onChange={(e) => setField("groupCode", e.target.value)}
                 />
               </div>
+              {joinSuccess && (
+                <div className="flex items-center space-x-2 text-green-500">
+                  <CheckCircle size={20} />
+                  <span>Welcome to the group!</span>
+                </div>
+              )}
+              {joinError && (
+                <div className="text-red-500">{joinError}</div>
+              )}
               <button
                 className="btn btn-primary w-full"
-                onClick={() => console.log("Joining group:", formState.groupCode)}
+                onClick={handleJoinGroup}
               >
                 Join Group
               </button>
