@@ -19,7 +19,7 @@ const Sidebar = () => {
     { name: "Dashboard", href: "/", icon: Home },
     { name: "Groups", href: "/groups", icon: GroupIcon },
     { name: "Profile", href: "/profile", icon: User },
-    { name: "Settings", href: "/settings", icon: Settings },
+    // { name: "Settings", href: "/settings", icon: Settings },
   ];
 
   return (

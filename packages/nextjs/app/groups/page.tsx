@@ -2,49 +2,54 @@
 
 import { Users, Activity, Bell } from 'lucide-react'
 
-const groups = [
-  {
-    emoji: '👨‍👩‍👧‍👦',
-    title: 'Family Expenses',
-    description: 'Track shared household expenses and family activities',
-    members: 4,
-    balance: 1250.75
-  },
-  {
-    emoji: '🏠',
-    title: 'Home Utilities',
-    description: 'Monthly bills for electricity, water, and internet',
-    members: 2,
-    balance: 385.50
-  },
-  {
-    emoji: '✈️',
-    title: 'Travel Group',
-    description: 'Upcoming trip expenses and planning',
-    members: 6,
-    balance: 2800.00
-  },
-  {
-    emoji: '🍕',
-    title: 'Food & Dining',
-    description: 'Restaurant visits and grocery shopping',
-    members: 3,
-    balance: 175.25
-  },
-  {
-    emoji: '🎁',
-    title: 'Gift Pool',
-    description: 'Group gift contributions and special occasions',
-    members: 8,
-    balance: 420.00
-  }
-]
+  const groups = [
+    {
+      id: 'group-1',
+      emoji: '👨‍👩‍👧‍👦',
+      title: 'Family Expenses',
+      description: 'Track shared household expenses and family activities',
+      members: 4,
+      balance: 1250.75
+    },
+    {
+      id: 'group-2',
+      emoji: '🏠',
+      title: 'Home Utilities',
+      description: 'Monthly bills for electricity, water, and internet',
+      members: 2,
+      balance: 385.50
+    },
+    {
+      id: 'group-3',
+      emoji: '✈️',
+      title: 'Travel Group',
+      description: 'Upcoming trip expenses and planning',
+      members: 6,
+      balance: 2800.00
+    },
+    {
+      id: 'group-4',
+      emoji: '🍕',
+      title: 'Food & Dining',
+      description: 'Restaurant visits and grocery shopping',
+      members: 3,
+      balance: 175.25
+    },
+    {
+      id: 'group-5',
+      emoji: '🎁',
+      title: 'Gift Pool',
+      description: 'Group gift contributions and special occasions',
+      members: 8,
+      balance: 420.00
+    }
+  ]
 
 const recentActivity = [
-  { user: 'Alice', action: 'added an expense', group: 'Family Expenses', amount: 50.00 },
-  { user: 'Bob', action: 'settled up', group: 'Travel Group', amount: 120.50 },
-  { user: 'Charlie', action: 'created a new group', group: 'Movie Night', amount: null },
-  { user: 'Diana', action: 'commented on', group: 'Home Utilities', amount: null },
+  { id: 'activity-1', user: 'Alice', action: 'added an expense', group: 'Family Expenses', amount: 50.00 },
+  { id: 'activity-2', user: 'Bob', action: 'settled up', group: 'Travel Group', amount: 120.50 },
+  { id: 'activity-3', user: 'Charlie', action: 'created a new group', group: 'Movie Night', amount: null },
+  { id: 'activity-4', user: 'Diana', action: 'commented on', group: 'Home Utilities', amount: null },
 ]
 
 export default function GroupsPage() {
@@ -81,8 +86,8 @@ export default function GroupsPage() {
       <div className="mb-8">
         <h2 className="text-2xl font-semibold mb-4">My Groups</h2>
         <div className="join join-vertical w-full">
-          {groups.map((group, index) => (
-            <div key={index} className="collapse collapse-arrow join-item border border-base-300">
+          {groups.map((group) => (
+            <div key={group.id} className="collapse collapse-arrow join-item border border-base-300">
               <input type="radio" name="my-accordion" /> 
               <div className="collapse-title text-xl font-medium flex items-center gap-3">
                 <span className="text-2xl">{group.emoji}</span>
@@ -107,8 +112,8 @@ export default function GroupsPage() {
       <div>
         <h2 className="text-2xl font-semibold mb-4">Recent Activity</h2>
         <ul className="space-y-2">
-          {recentActivity.map((activity, index) => (
-            <li key={index} className="bg-base-200 p-4 rounded-box flex justify-between items-center">
+          {recentActivity.map((activity) => (
+            <li key={activity.id} className="bg-base-200 p-4 rounded-box flex justify-between items-center">
               <div>
                 <span className="font-medium">{activity.user}</span> {activity.action} <span className="font-medium">{activity.group}</span>
               </div>
@@ -120,4 +125,3 @@ export default function GroupsPage() {
     </div>
   )
 }
-
