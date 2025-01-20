@@ -14,9 +14,9 @@ const ScaffoldStarkApp = ({ children }: { children: React.ReactNode }) => {
     <html suppressHydrationWarning>
       <body>
         {/* <ThemeProvider enableSystem> */}
-          <ScaffoldStarkAppWithProviders>
-            {children}
-          </ScaffoldStarkAppWithProviders>
+        <ScaffoldStarkAppWithProviders>
+          {children}
+        </ScaffoldStarkAppWithProviders>
         {/* </ThemeProvider> */}
       </body>
     </html>

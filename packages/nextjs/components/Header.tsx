@@ -20,7 +20,6 @@ type HeaderMenuLink = {
   icon?: React.ReactNode;
 };
 
-
 /**
  * Site header
  */
