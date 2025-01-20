@@ -37,7 +37,7 @@ const Sidebar = () => {
 
       {/* Navigation */}
       <ul className="menu mt-4 px-4 space-y-4 text-lg overflow-y-auto">
-        {menuItems.map(({ name, href, icon: Icon, color }) => (
+        {menuItems.map(({ name, href, icon: Icon }) => (
           <li key={name}>
             <Link
               href={href}
@@ -45,7 +45,7 @@ const Sidebar = () => {
                 activeRoute === href
                   ? "bg-gray-800 text-white"
                   : "hover:bg-gray-800 hover:text-white"
-              } ${color || ""}`}
+              }`}
             >
               <Icon size={20} />
               <span>{name}</span>
