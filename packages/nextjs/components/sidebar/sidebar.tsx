@@ -4,7 +4,8 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, User, Settings, LogOut, GroupIcon } from "lucide-react";
+import { Home, User, Settings, GroupIcon } from "lucide-react";
+import ArkXpense from "../../public/ArkXpence.svg";
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -18,25 +19,24 @@ const Sidebar = () => {
     { name: "Dashboard", href: "/", icon: Home },
     { name: "Groups", href: "/groups", icon: GroupIcon },
     { name: "Profile", href: "/profile", icon: User },
-    { name: "Settings", href: "/settings", icon: Settings },
-    // { name: "Logout", href: "/logout", icon: LogOut, color: "text-red-400 hover:text-red-300" },
+    // { name: "Settings", href: "/settings", icon: Settings },
   ];
 
   return (
-    <div className="h-screen w-64  text-gray-300 flex flex-col shadow-lg">
+    <div className="h-screen overflow-hidden w-64 text-gray-300 flex flex-col shadow-lg">
       {/* Logo */}
       <div className="p-6 flex items-center justify-center border-b border-gray-800">
         <Image
-          src="/placeholder-logo.png"
+          src={ArkXpense}
           alt="Logo"
-          width={80}
-          height={80}
+          width={300}
+          height={300}
           className="rounded-full"
         />
       </div>
 
       {/* Navigation */}
-      <ul className="menu mt-4 px-4 space-y-4 text-lg">
+      <ul className="menu mt-4 px-4 space-y-4 text-lg overflow-y-auto">
         {menuItems.map(({ name, href, icon: Icon, color }) => (
           <li key={name}>
             <Link
