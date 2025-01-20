@@ -4,8 +4,8 @@ import "~~/styles/globals.css";
 import { ThemeProvider } from "~~/components/ThemeProvider";
 
 export const metadata: Metadata = {
-  title: "Scaffold-Stark",
-  description: "Fast track your starknet journey",
+  title: "ArkXpense",
+  description: "Share your expenses with your homies",
   icons: "/logo.ico",
 };
 
@@ -13,11 +13,11 @@ const ScaffoldStarkApp = ({ children }: { children: React.ReactNode }) => {
   return (
     <html suppressHydrationWarning>
       <body>
-        <ThemeProvider enableSystem>
-          <ScaffoldStarkAppWithProviders>
-            {children}
-          </ScaffoldStarkAppWithProviders>
-        </ThemeProvider>
+        {/* <ThemeProvider enableSystem> */}
+        <ScaffoldStarkAppWithProviders>
+          {children}
+        </ScaffoldStarkAppWithProviders>
+        {/* </ThemeProvider> */}
       </body>
     </html>
   );
