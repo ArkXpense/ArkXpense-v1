@@ -1,26 +1,25 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { User, Mail, Bell, Shield, LogOut } from 'lucide-react'
+import { useState } from "react";
+import { User, Mail, Bell, Shield, LogOut } from "lucide-react";
 
 export default function ProfilePage() {
-  const [nickname, setNickname] = useState('santivillarley')
-  const [isEditing, setIsEditing] = useState(false)
-  const email = 'santivillarley1010@gmail.com'
+  const [nickname, setNickname] = useState("santivillarley");
+  const [isEditing, setIsEditing] = useState(false);
+  const email = "santivillarley1010@gmail.com";
 
   const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNickname(e.target.value)
-  }
+    setNickname(e.target.value);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsEditing(false)
-    // Aquí iría la lógica para guardar el nuevo nickname en el backend
-  }
+    e.preventDefault();
+    setIsEditing(false);
+  };
 
   return (
     <div className="p-6 w-full max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-8">Mi Perfil</h1>
+      <h1 className="text-3xl font-bold mb-8">My Profile</h1>
 
       <div className="bg-base-200 p-6 rounded-box shadow-lg">
         <div className="flex items-center mb-6">
@@ -38,13 +37,18 @@ export default function ProfilePage() {
                   onChange={handleNicknameChange}
                   className="input input-bordered mr-2"
                 />
-                <button type="submit" className="btn btn-primary">Guardar</button>
+                <button type="submit" className="btn btn-primary">
+                  Save
+                </button>
               </form>
             ) : (
               <div className="flex items-center">
                 <h2 className="text-2xl font-semibold mr-2">{nickname}</h2>
-                <button onClick={() => setIsEditing(true)} className="btn btn-sm btn-ghost">
-                  Editar
+                <button
+                  onClick={() => setIsEditing(true)}
+                  className="btn btn-sm btn-ghost"
+                >
+                  Edit
                 </button>
               </div>
             )}
@@ -57,23 +61,23 @@ export default function ProfilePage() {
         <div className="space-y-4">
           <div className="flex items-center">
             <User className="mr-2" />
-            <span>Información de la cuenta</span>
-            <button className="btn btn-sm btn-ghost ml-auto">Editar</button>
+            <span>Account Information</span>
+            <button className="btn btn-sm btn-ghost ml-auto">Edit</button>
           </div>
           <div className="flex items-center">
             <Mail className="mr-2" />
-            <span>Preferencias de correo</span>
-            <button className="btn btn-sm btn-ghost ml-auto">Configurar</button>
+            <span>Email Preferences</span>
+            <button className="btn btn-sm btn-ghost ml-auto">Configure</button>
           </div>
           <div className="flex items-center">
             <Bell className="mr-2" />
-            <span>Notificaciones</span>
-            <button className="btn btn-sm btn-ghost ml-auto">Gestionar</button>
+            <span>Notifications</span>
+            <button className="btn btn-sm btn-ghost ml-auto">Manage</button>
           </div>
           <div className="flex items-center">
             <Shield className="mr-2" />
-            <span>Seguridad</span>
-            <button className="btn btn-sm btn-ghost ml-auto">Revisar</button>
+            <span>Security</span>
+            <button className="btn btn-sm btn-ghost ml-auto">Review</button>
           </div>
         </div>
 
@@ -81,10 +85,9 @@ export default function ProfilePage() {
 
         <button className="btn btn-outline btn-error w-full">
           <LogOut className="mr-2" />
-          Cerrar sesión
+          Log Out
         </button>
       </div>
     </div>
-  )
+  );
 }
-

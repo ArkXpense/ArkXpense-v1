@@ -68,8 +68,7 @@ const config: Config = {
       backgroundImage: {
         "gradient-light":
           "linear-gradient(270deg, #A7ECFF -17.42%, #E8B6FF 109.05%)",
-        "gradient-dark":
-          "linear-gradient(90deg, #42D2F1 0%, #B248DD 100%)",
+        "gradient-dark": "linear-gradient(90deg, #42D2F1 0%, #B248DD 100%)",
         "gradient-vertical":
           "linear-gradient(180deg, #3457D1 0%, #8A45FC 100%)",
       },

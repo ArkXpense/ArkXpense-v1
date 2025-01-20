@@ -5,7 +5,7 @@ import { useAccount } from "~~/hooks/useAccount";
 import { useRouter } from "next/navigation";
 
 export default function Page() {
-  const { status, address:walletAddress } = useAccount(); // Asegúrate de que useAccount retorne walletAddress
+  const { status, address: walletAddress } = useAccount(); // Asegúrate de que useAccount retorne walletAddress
   const router = useRouter();
   const [loading, setLoading] = useState(true);
 
@@ -15,7 +15,7 @@ export default function Page() {
       setLoading(true);
       try {
         console.log("Simulando llamada al API...");
-        const response:any = await new Promise((resolve) => {
+        const response: any = await new Promise((resolve) => {
           setTimeout(() => {
             resolve({ success: true, walletAddress });
           }, 2000); // Simula 2 segundos de espera

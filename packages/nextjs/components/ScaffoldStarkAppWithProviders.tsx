@@ -9,14 +9,15 @@ import provider from "~~/services/web3/provider";
 import { useNativeCurrencyPrice } from "~~/hooks/scaffold-stark/useNativeCurrencyPrice";
 import { useScaffoldStarkApp } from "~~/hooks/scaffold-stark/useScaffoldStarkApp";
 
-
 const ScaffoldStarkApp = ({ children }: { children: React.ReactNode }) => {
   useNativeCurrencyPrice();
   const { isAuthPage } = useScaffoldStarkApp();
 
   return (
     <>
-      <div className={`flex relative overflow-y-hidden} ${isAuthPage ? "" : "bg-main"}`}>
+      <div
+        className={`flex relative overflow-y-hidden} ${isAuthPage ? "" : "bg-main"}`}
+      >
         {!isAuthPage && <Sidebar />}
         <div className="flex flex-col w-full h-screen">
           {!isAuthPage && <Header />}

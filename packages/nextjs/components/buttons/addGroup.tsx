@@ -1,21 +1,16 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { FloatingButton } from "~~/components/floating-button";
 import { Plus, Users, Group, Trash, CheckCircle } from "lucide-react";
 import { useFormSetterWithValidation } from "~~/hooks/useFormSetter";
-
-// Grupos hardcodeados
-const hardcodedGroups = [
-  { code: "1234", title: "Grupo 1" },
-  { code: "5678", title: "Grupo 2" },
-  { code: "9101", title: "Grupo 3" },
-  { code: "1121", title: "Grupo 4" },
-];
+import { groups } from "~~/data/groups";
 
 const AddGroup = () => {
   const validators = {
-    title: (value: string) => (value.trim() === "" ? "Title is required" : null),
+    title: (value: string) =>
+      value.trim() === "" ? "Title is required" : null,
     groupCode: (value: string) =>
       value.trim() === "" ? "Group code is required" : null,
   };
@@ -26,12 +21,13 @@ const AddGroup = () => {
       groupCode: "",
       participants: [] as { name: string; wallet: string }[],
     },
-    validators
+    validators,
   );
 
   const [step, setStep] = useState(1);
   const [joinSuccess, setJoinSuccess] = useState(false);
   const [joinError, setJoinError] = useState("");
+  const router = useRouter();
 
   const handleNext = () => {
     if (step === 1 && !formState.title.trim()) {
@@ -45,17 +41,14 @@ const AddGroup = () => {
 
   const handleAddParticipant = (name: string, wallet: string) => {
     if (name.trim() && wallet.trim()) {
-      setField("participants", [
-        ...formState.participants,
-        { name, wallet },
-      ]);
+      setField("participants", [...formState.participants, { name, wallet }]);
     }
   };
 
   const handleRemoveParticipant = (index: number) => {
     setField(
       "participants",
-      formState.participants.filter((_, i) => i !== index)
+      formState.participants.filter((_, i) => i !== index),
     );
   };
 
@@ -71,10 +64,11 @@ const AddGroup = () => {
   };
 
   const handleJoinGroup = () => {
-    const group = hardcodedGroups.find(g => g.code === formState.groupCode);
+    const group = groups.find((g) => g.code === formState.groupCode); // Buscar el grupo por código
     if (group) {
       setJoinSuccess(true);
       setJoinError("");
+      router.push(`/groups/${group.id}`);
     } else {
       setJoinSuccess(false);
       setJoinError("Invalid group code");
@@ -164,7 +158,10 @@ const AddGroup = () => {
               )}
               <div className="flex justify-between">
                 {step > 1 && (
-                  <button className="btn btn-secondary" onClick={handlePrevious}>
+                  <button
+                    className="btn btn-secondary"
+                    onClick={handlePrevious}
+                  >
                     Previous
                   </button>
                 )}
@@ -208,12 +205,10 @@ const AddGroup = () => {
               {joinSuccess && (
                 <div className="flex items-center space-x-2 text-green-500">
                   <CheckCircle size={20} />
-                  <span>Welcome to the group!</span>
+                  <span>Welcome to the group! Redirecting...</span>
                 </div>
               )}
-              {joinError && (
-                <div className="text-red-500">{joinError}</div>
-              )}
+              {joinError && <div className="text-red-500">{joinError}</div>}
               <button
                 className="btn btn-primary w-full"
                 onClick={handleJoinGroup}
